@@ -32,7 +32,7 @@
             <a href="{config['url-base']}/shop/projects" class="px-4 py-2 bg-[var(--theme-color)] text-[var(--background-color)] rounded-lg shadow-md hover:shadow-lg transition-shadow">Projects</a>
         </div>
         {/if}
-        <div class="subtitle" style="opacity: 0.7;">* Fullfillment will be based on local prices & availability.</div>
+        <!--<div class="subtitle" style="opacity: 0.7;">* Fullfillment will be based on local prices & availability.</div>-->
         {#if data.isAdmin}
                     <a target="_blank" href="https://dog-match.fillout.com/trailit-itemadd?passkey={data.filloutPasskey}" class="px-4 py-2 bg-[var(--theme-color)] text-[var(--background-color)] rounded-lg shadow-md hover:shadow-lg transition-shadow">Create a new item</a>
         {/if}
