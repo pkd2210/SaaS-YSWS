@@ -1,4 +1,8 @@
 import Airtable from 'airtable';
+import { config } from 'dotenv';
+
+// Load environment variables
+config();
 
 export async function load({ cookies }: any) {
     const access_token = cookies.get('hca_access_token') || null;
