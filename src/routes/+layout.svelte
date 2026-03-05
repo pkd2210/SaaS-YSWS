@@ -1,11 +1,35 @@
 <script lang="ts">
 	import '../app.css';
     import config from '$lib/stores/config.json';
-	
+	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+	import AppSidebar from "$lib/components/app-sidebar.svelte";
+	import { IsMobile } from '$lib/hooks/is-mobile.svelte';
+
 	let { children, data } = $props();
+	const isMobile = new IsMobile();
 </script>
 
-<div class="w-full">
+<!--Sidebar-->
+<Sidebar.Provider>
+<AppSidebar {data}/>
+{#if isMobile.current}
+<Sidebar.Trigger />
+{/if}
+<Sidebar.Inset>
+<div
+	style="
+		--background-color: {config['background-color']};
+		--secondary-theme-color: {config['secondary-theme-color']};
+		--theme-color: {config['theme-color']};
+	"
+	class="app-root"
+>
+	{@render children?.()}
+</div>
+</Sidebar.Inset>
+</Sidebar.Provider>
+<!--End of sidebard-->
+<!--<div class="w-full">
 		<div class="fixed top-4 left-0 right-0 z-50 flex flex-col items-center">
 			<div style="color: {config['theme-color']}; background-color: {config['background-color']}; border: 2px solid {config['secondary-theme-color']};" class="flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-lg shadow-lg">
 				{#if data.user}
@@ -28,7 +52,7 @@
 		</div>
 	
 </div>
-
+-->
 <svelte:head>
 	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -37,17 +61,6 @@
 	<meta name="apple-mobile-web-app-title" content="TrailIt YSWS" />
 	<link rel="manifest" href="/site.webmanifest" />
 </svelte:head>
-
-<div
-	style="
-		--background-color: {config['background-color']};
-		--secondary-theme-color: {config['secondary-theme-color']};
-		--theme-color: {config['theme-color']};
-	"
-	class="app-root"
->
-	{@render children()}
-</div>
 
 <style>
 	:global(html) {

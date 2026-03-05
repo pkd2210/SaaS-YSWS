@@ -1,0 +1,107 @@
+<script lang="ts" module>
+	import GalleryVerticalEndIcon from "@lucide/svelte/icons/gallery-vertical-end";
+	import HomeIcon from "@lucide/svelte/icons/home";
+	import ShoppingCartIcon from "@lucide/svelte/icons/shopping-cart";
+	import TrophyIcon from "@lucide/svelte/icons/trophy";
+	import SendHorizontal from "@lucide/svelte/icons/send-horizontal";
+	import Clapperboard from "@lucide/svelte/icons/clapperboard";
+</script>
+
+<script lang="ts">
+	import NavMain from "./nav-main.svelte";
+	import NavUser from "./nav-user.svelte";
+	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+	import type { ComponentProps } from "svelte";
+	import config from '$lib/stores/config.json';
+
+	let {
+		data,
+		ref = $bindable(null),
+		collapsible = "icon",
+		...restProps
+	}: ComponentProps<typeof Sidebar.Root> & { data: any } = $props();
+
+	// Create sidebar navigation based on user state
+	const sidebarData = $derived({
+		user: data.user ? {
+			name: data.user.first_name || "User",
+			email: data.user.email || "",
+			avatar: data.user.avatar,
+		} : null,
+		navMain: [
+			{
+				title: "Home",
+				url: config['url-base'],
+				icon: HomeIcon,
+				isActive: true,
+			},
+			{
+				title: "Shop",
+				url: `${config['url-base']}/shop`,
+				icon: ShoppingCartIcon,
+				items: [
+					{
+						title: "Browse Items",
+						url: `${config['url-base']}/shop`,
+					},
+					...(data.user ? [{
+						title: "Orders",
+						url: `${config['url-base']}/shop/orders`,
+					}] : []),
+					...(data.user ? [{
+						title: "Projects",
+						url: `${config['url-base']}/shop/projects`,
+					}] : []),
+					
+				],
+			},
+			...(data.user ? [{
+				title: "Quests",
+				url: `${config['url-base']}/quests`,
+				icon: TrophyIcon,
+			}] : []),
+			...(data.user ? [{
+				title: "Submit",
+				icon: SendHorizontal,
+				items: [
+					{
+						title: "Submit Product",
+						url: `${config['url-base']}/submit/product`,
+					},
+					{
+						title: "Submit Video",
+						url: `${config['url-base']}/submit/video`,
+					},
+				],
+			}] : []),
+		],
+	});
+</script>
+
+<Sidebar.Root {collapsible} {...restProps}>
+	<Sidebar.Header>
+		<a href={config['url-base']}>
+			<div class="flex items-center gap-2 px-2 py-2">
+				<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+					<Clapperboard class="h-4 w-4" />
+				</div>
+				<div class="flex flex-col">
+					<span class="text-sm font-semibold">TrailIt YSWS</span>
+				</div>
+			</div>
+		</a>
+	</Sidebar.Header>
+	<Sidebar.Content>
+		<NavMain items={sidebarData.navMain} />
+	</Sidebar.Content>
+	<Sidebar.Footer>
+		{#if sidebarData.user}
+			<NavUser user={sidebarData.user} data={data}/>
+		{:else}
+			<div class="px-3 py-2">
+				<a href="{config['url-base']}/api/login" class="text-sm text-primary hover:underline">Login</a>
+			</div>
+		{/if}
+	</Sidebar.Footer>
+	<Sidebar.Rail />
+</Sidebar.Root>
