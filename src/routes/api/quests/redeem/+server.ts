@@ -96,7 +96,6 @@ export async function POST({ request, cookies }) {
                         ItemID: [prizeId],
                         Price: 0, // Free quest reward
                         OrderDate: new Date().toISOString(),
-                        itemName: prizeName,
                         Status: 'Pending',
                         Notes: `Quest reward from: ${questName}`
                     }

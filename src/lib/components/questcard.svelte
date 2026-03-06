@@ -1,8 +1,13 @@
 <script>
     import config from '$lib/stores/config.json';
+    import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
     
     export let quest;
     export let userSlackId = null;
+
+    // Dialog states
+    let showErrorDialog = false;
+    let errorMessage = '';
 
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -104,11 +109,13 @@
                 location.reload();
             } else {
                 console.error('Failed to redeem quest:', result.error);
-                alert(result.error || 'Failed to redeem quest');
+                errorMessage = result.error || 'Failed to redeem quest';
+                showErrorDialog = true;
             }
         } catch (error) {
             console.error('Error redeeming quest:', error);
-            alert('Error redeeming quest');
+            errorMessage = 'Error redeeming quest';
+            showErrorDialog = true;
         } finally {
             isRedeeming = false;
         }
@@ -456,3 +463,18 @@
         }
     }
 </style>
+
+<!-- Error Dialog -->
+<AlertDialog.Root bind:open={showErrorDialog}>
+    <AlertDialog.Content>
+        <AlertDialog.Header>
+            <AlertDialog.Title>Quest Redemption Error</AlertDialog.Title>
+            <AlertDialog.Description>
+                {errorMessage}
+            </AlertDialog.Description>
+        </AlertDialog.Header>
+        <AlertDialog.Footer>
+            <AlertDialog.Action onclick={() => showErrorDialog = false} style="cursor: pointer;">OK</AlertDialog.Action>
+        </AlertDialog.Footer>
+    </AlertDialog.Content>
+</AlertDialog.Root>

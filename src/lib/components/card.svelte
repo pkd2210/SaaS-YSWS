@@ -1,65 +1,89 @@
 <script>
     import config from '$lib/stores/config.json';
-    
+    import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
+    import { buttonVariants } from "$lib/components/ui/button/index.js";
+
     export let item;
     export let data;
 
-    function confirmPurchase(item) {
-        return confirm(`Are you sure you want to purchase ${item.name} for ${config['tokens-symbol']}${item.price ? item.price.toLocaleString() : '0'}?`);
+    // Dialog states
+    let showPurchaseConfirm = false;
+    let showPurchaseSuccess = false;
+    let showGrantError = false;
+    let showGrantSuccess = false;
+    let showGrantInput = false;
+    let pendingPurchaseItem = null;
+    let pendingGrantItem = null;
+    let grantAmount = 1;
+
+    function showPurchaseDialog(item) {
+        pendingPurchaseItem = item;
+        showPurchaseConfirm = true;
     }
 
-    async function handleBuy(item, data) {
-        if (!confirmPurchase(item)) {
-            return;
-        }
-            try {
-                const response = await fetch('/shop/buy', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ item, data })
-                });
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Purchase successful:', result);
-                    alert('Purchase successful!');
-                    window.location.reload();
-                }
-            } catch (error) {
-                console.error('Error purchasing item:', error);
+    async function confirmPurchase() {
+        showPurchaseConfirm = false;
+        if (!pendingPurchaseItem) return;
+        
+        try {
+            const response = await fetch('/shop/buy', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ item: pendingPurchaseItem, data })
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Purchase successful:', result);
+                showPurchaseSuccess = true;
             }
+        } catch (error) {
+            console.error('Error purchasing item:', error);
+        }
+        pendingPurchaseItem = null;
     }
 
-    async function handleBuyGrant(item, data) {
-        const grantAmount = document.createElement('div');
-        grantAmount.innerHTML = `
-            <label for="grant-amount">Enter the amount of dollars you need on your grant (exp, 10$ = ${item.price || 0}${config['tokens-symbol']} * 10$ = ${(item.price || 0) * 10}${config['tokens-symbol']}): </label>
-            <input type="number" id="grant-amount" name="grant-amount" min="1" required />
-        `;
-        const userInput = prompt('Enter Grant amount ($):', '1');
-        const amount = parseInt(userInput);
-        if (isNaN(amount) || amount < 1) {
-            alert('Invalid grant amount.');
+    function handlePurchaseSuccess() {
+        showPurchaseSuccess = false;
+        window.location.reload();
+    }
+
+    function showGrantDialog(item) {
+        pendingGrantItem = item;
+        grantAmount = 1;
+        showGrantInput = true;
+    }
+
+    async function confirmGrantPurchase() {
+        showGrantInput = false;
+        if (!pendingGrantItem || isNaN(grantAmount) || grantAmount < 1) {
+            showGrantError = true;
             return;
         }
+        
         try {
             const response = await fetch('/shop/buy-grant', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ item, data, amount })
+                body: JSON.stringify({ item: pendingGrantItem, data, amount: grantAmount })
             });
             if (response.ok) {
                 const result = await response.json();
                 console.log('Grant purchase successful:', result);
-                alert('Grant purchase successful!');
-                window.location.reload();
+                showGrantSuccess = true;
             }
         } catch (error) {
             console.error('Error purchasing grant:', error);
         }
+        pendingGrantItem = null;
+    }
+
+    function handleGrantSuccess() {
+        showGrantSuccess = false;
+        window.location.reload();
     }
 </script>
 <div class="card" style="border-color: {config['secondary-theme-color']}; background-color: {config['background-color']};">
@@ -78,12 +102,12 @@
         <div class="actions">
             <div class="action-row">
                 {#if item.type == "grant"}
-                    <button on:click={() => handleBuyGrant(item, data)} style="background-color: {config['theme-color']}; color: {config['background-color']}; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer;">
+                    <button on:click={() => showGrantDialog(item)} style="background-color: {config['theme-color']}; color: {config['background-color']}; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer;">
                         Get Grant
                     </button>
                 {:else}
                     {#if item.price<= data.userTokens}
-                    <button  on:click={() => handleBuy(item, data)} style="background-color: {config['theme-color']}; color: {config['background-color']}; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer;">
+                    <button  on:click={() => showPurchaseDialog(item)} style="background-color: {config['theme-color']}; color: {config['background-color']}; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer;">
                         Buy Now
                     </button>
                     {:else}
@@ -106,6 +130,97 @@
         {/if}
     </div>
 </div>
+
+<!-- Purchase Confirmation Dialog -->
+<AlertDialog.Root bind:open={showPurchaseConfirm}>
+    <AlertDialog.Content>
+        <AlertDialog.Header>
+            <AlertDialog.Title>Confirm Purchase</AlertDialog.Title>
+            <AlertDialog.Description>
+                Are you sure you want to purchase {pendingPurchaseItem?.name || ''} for {config['tokens-symbol']}{pendingPurchaseItem?.price ? pendingPurchaseItem.price.toLocaleString() : '0'}?
+            </AlertDialog.Description>
+        </AlertDialog.Header>
+        <AlertDialog.Footer>
+            <AlertDialog.Cancel style="cursor: pointer;">Cancel</AlertDialog.Cancel>
+            <AlertDialog.Action onclick={confirmPurchase} style="cursor: pointer;">Confirm Purchase</AlertDialog.Action>
+        </AlertDialog.Footer>
+    </AlertDialog.Content>
+</AlertDialog.Root>
+
+<!-- Purchase Success Dialog -->
+<AlertDialog.Root bind:open={showPurchaseSuccess}>
+    <AlertDialog.Content>
+        <AlertDialog.Header>
+            <AlertDialog.Title>Purchase Successful!</AlertDialog.Title>
+            <AlertDialog.Description>
+                Your purchase has been completed successfully.
+            </AlertDialog.Description>
+        </AlertDialog.Header>
+        <AlertDialog.Footer>
+            <AlertDialog.Action onclick={handlePurchaseSuccess} style="cursor: pointer;">OK</AlertDialog.Action>
+        </AlertDialog.Footer>
+    </AlertDialog.Content>
+</AlertDialog.Root>
+
+<!-- Grant Error Dialog -->
+<AlertDialog.Root bind:open={showGrantError}>
+    <AlertDialog.Content>
+        <AlertDialog.Header>
+            <AlertDialog.Title>Invalid Grant Amount</AlertDialog.Title>
+            <AlertDialog.Description>
+                Please enter a valid grant amount greater than 0.
+            </AlertDialog.Description>
+        </AlertDialog.Header>
+        <AlertDialog.Footer>
+            <AlertDialog.Action onclick={() => showGrantError = false} style="cursor: pointer;">OK</AlertDialog.Action>
+        </AlertDialog.Footer>
+    </AlertDialog.Content>
+</AlertDialog.Root>
+
+<!-- Grant Success Dialog -->
+<AlertDialog.Root bind:open={showGrantSuccess}>
+    <AlertDialog.Content>
+        <AlertDialog.Header>
+            <AlertDialog.Title>Grant Purchase Successful!</AlertDialog.Title>
+            <AlertDialog.Description>
+                Your grant purchase has been completed successfully.
+            </AlertDialog.Description>
+        </AlertDialog.Header>
+        <AlertDialog.Footer>
+            <AlertDialog.Action onclick={handleGrantSuccess} style="cursor: pointer;">OK</AlertDialog.Action>
+        </AlertDialog.Footer>
+    </AlertDialog.Content>
+</AlertDialog.Root>
+
+<!-- Grant Amount Input Dialog -->
+<AlertDialog.Root bind:open={showGrantInput}>
+    <AlertDialog.Content>
+        <AlertDialog.Header>
+            <AlertDialog.Title>Enter Grant Amount</AlertDialog.Title>
+            <AlertDialog.Description>
+                Enter the amount in dollars you need on your grant. 
+                <br />
+                Example: $10 = {pendingGrantItem?.price || 0}{config['tokens-symbol']} × 10 = {(pendingGrantItem?.price || 0) * 10}{config['tokens-symbol']}
+            </AlertDialog.Description>
+        </AlertDialog.Header>
+        <div class="p-4">
+            <label for="grant-amount-input" class="block text-sm font-medium mb-2">Amount ($):</label>
+            <input 
+                id="grant-amount-input"
+                type="number" 
+                bind:value={grantAmount}
+                min="1" 
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter amount in dollars"
+            />
+        </div>
+        <AlertDialog.Footer>
+            <AlertDialog.Cancel style="cursor: pointer;">Cancel</AlertDialog.Cancel>
+            <AlertDialog.Action onclick={confirmGrantPurchase} style="cursor: pointer;">Confirm Grant</AlertDialog.Action>
+        </AlertDialog.Footer>
+    </AlertDialog.Content>
+</AlertDialog.Root>
 <style>
     .card {
         border: 2px solid;
