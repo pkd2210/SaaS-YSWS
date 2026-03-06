@@ -15,5 +15,5 @@ export const GET = async ({ cookies }) => {
     });
 
     // Redirect to shop after demo login
-    throw redirect(303, config["url-base"] + "/shop");
+    throw redirect(303, config["url-base"] + "/");
 };

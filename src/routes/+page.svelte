@@ -56,7 +56,7 @@
     {:else}
         <a href="/api/login"><button class="login-button">Login</button></a>
         <br>
-        <a href="/api/demo-login"><button class="demo-button">Try Demo</button></a>
+        <!-- <a href="/api/demo-login"><button class="demo-button">Try Demo</button></a> -->
     {/if}
 </div>
 
