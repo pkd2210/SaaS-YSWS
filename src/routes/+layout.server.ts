@@ -6,6 +6,25 @@ config();
 
 export async function load({ cookies }: any) {
     const access_token = cookies.get('hca_access_token') || null;
+    
+    // Check if this is a demo token
+    if (access_token && access_token.startsWith('demo_user_token_')) {
+        // Return demo user data
+        return {
+            user: {
+                email: 'demo@trailit.com',
+                first_name: 'Demo',
+                last_name: 'User',
+                slack_id: 'demo_user',
+                avatar: null
+            },
+            isAdmin: false,
+            userTokens: 1000, // Give demo user some tokens to play with
+            userRecordId: 'demo_record',
+            filloutPasskey: 'demo_passkey'
+        };
+    }
+    
     const response = await fetch('https://auth.hackclub.com/api/v1/me', {
         headers: {
             Authorization: `Bearer ${access_token}`

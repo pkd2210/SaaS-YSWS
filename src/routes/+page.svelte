@@ -34,13 +34,29 @@
         .slack-button:hover {
             background-color: #801f2c;
         }
+        .demo-button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+        .demo-button:hover {
+            background-color: #5a6268;
+        }
         </style>
     <!--End of the editing section-->
     <br>
     {#if data.user}
         <a href="{config['url-base']}/shop"><button class="login-button">Go to Shop</button></a>
     {:else}
-    <a href="/api/login"><button class="login-button">Login</button></a>
+        <a href="/api/login"><button class="login-button">Login</button></a>
+        <br>
+        <a href="/api/demo-login"><button class="demo-button">Try Demo</button></a>
     {/if}
 </div>
 
