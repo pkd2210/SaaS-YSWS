@@ -22,21 +22,20 @@
 </script>
 
 <Sidebar.Group>
-	<Sidebar.GroupLabel>Platform</Sidebar.GroupLabel>
-	<Sidebar.Menu>
+	<Sidebar.Menu class="space-y-2">
 		{#each items as item (item.title)}
 			{#if item.items && item.items.length > 0}
 				<!-- Item with sub-items: clickable main + expandable sub-menu -->
 				<Collapsible.Root open={item.isActive} class="group/collapsible">
 					{#snippet child({ props })}
-						<Sidebar.MenuItem {...props}>
+						<Sidebar.MenuItem {...props} class="mb-2">
 							<div class="flex w-full">
 								<!-- Main clickable link -->
-								<Sidebar.MenuButton class="flex-1" tooltipContent={item.title}>
+								<Sidebar.MenuButton class="flex-1" tooltipContent={item.title} size="lg">
 									{#snippet child({ props })}
-										<a href={item.url} {...props} class="flex items-center gap-2 flex-1">
+										<a href={item.url} {...props} class="flex items-center gap-3 flex-1 text-base">
 											{#if item.icon}
-												<item.icon />
+												<item.icon class="h-5 w-5" />
 											{/if}
 											<span>{item.title}</span>
 										</a>
@@ -45,21 +44,21 @@
 								<!-- Separate expand/collapse trigger -->
 								<Collapsible.Trigger>
 									{#snippet child({ props })}
-										<button {...props} class="flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent hover:text-accent-foreground">
+										<button {...props} class="flex h-12 w-12 items-center justify-center rounded-md hover:bg-accent hover:text-accent-foreground">
 											<ChevronRightIcon
-												class="h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"
+												class="h-5 w-5 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"
 											/>
 										</button>
 									{/snippet}
 								</Collapsible.Trigger>
 							</div>
 							<Collapsible.Content>
-								<Sidebar.MenuSub>
-									{#each item.items ?? [] as subItem (subItem.title)}
-										<Sidebar.MenuSubItem>
-											<Sidebar.MenuSubButton>
-												{#snippet child({ props })}
-													<a href={subItem.url} {...props}>
+							<Sidebar.MenuSub class="ml-4 space-y-1">
+								{#each item.items as subItem (subItem.title)}
+									<Sidebar.MenuSubItem>
+										<Sidebar.MenuSubButton size="lg">
+											{#snippet child({ props })}
+												<a href={subItem.url} {...props} class="text-base py-2">
 														<span>{subItem.title}</span>
 													</a>
 												{/snippet}
@@ -73,12 +72,12 @@
 				</Collapsible.Root>
 			{:else}
 				<!-- Simple clickable item without sub-items -->
-				<Sidebar.MenuItem>
-					<Sidebar.MenuButton tooltipContent={item.title}>
+				<Sidebar.MenuItem class="mb-2">
+					<Sidebar.MenuButton tooltipContent={item.title} size="lg">
 						{#snippet child({ props })}
-							<a href={item.url} {...props} class="flex items-center gap-2">
+							<a href={item.url} {...props} class="flex items-center gap-3 text-base">
 								{#if item.icon}
-									<item.icon />
+									<item.icon class="h-5 w-5" />
 								{/if}
 								<span>{item.title}</span>
 							</a>
