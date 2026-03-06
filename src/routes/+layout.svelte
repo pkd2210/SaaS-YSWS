@@ -4,6 +4,7 @@
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import AppSidebar from "$lib/components/app-sidebar.svelte";
 	import { IsMobile } from '$lib/hooks/is-mobile.svelte';
+	import Footer from '$lib/components/footer.svelte';
 
 	let { children, data } = $props();
 	const isMobile = new IsMobile();
@@ -25,6 +26,7 @@
 	class="app-root"
 >
 	{@render children?.()}
+	<Footer />
 </div>
 </Sidebar.Inset>
 </Sidebar.Provider>
@@ -71,6 +73,8 @@
 		min-height: 100vh;
 		background-color: var(--background-color);
 		padding-top: 5rem;
+		display: flex;
+		flex-direction: column;
 	}
 
 	:global(.center) {
