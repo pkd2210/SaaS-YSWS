@@ -80,10 +80,10 @@
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />-->
 				<DropdownMenu.Item>
+				<a href="{config['url-base']}/logout" class="flex items-center gap-2">
 					<LogOutIcon />
-					<a href="{config['url-base']}/logout" class="flex items-center gap-2">
 						Log out
-					</a>
+						</a>
 				</DropdownMenu.Item>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>
