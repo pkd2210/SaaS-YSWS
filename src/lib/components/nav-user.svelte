@@ -6,6 +6,7 @@
 	import BadgeCheckIcon from "@lucide/svelte/icons/badge-check";
 	import BellIcon from "@lucide/svelte/icons/bell";
 	import ChevronsUpDownIcon from "@lucide/svelte/icons/chevrons-up-down";
+	import TrophyIcon from "@lucide/svelte/icons/trophy";
 	import CreditCardIcon from "@lucide/svelte/icons/credit-card";
 	import LogOutIcon from "@lucide/svelte/icons/log-out";
 	import SparklesIcon from "@lucide/svelte/icons/sparkles";
@@ -57,8 +58,8 @@
 					</div>
 				</DropdownMenu.Label>
 				<DropdownMenu.Separator />
-				<!--<DropdownMenu.Group>
-					<DropdownMenu.Item>
+				<DropdownMenu.Group>
+				<!--	<DropdownMenu.Item>
 						<SparklesIcon />
 						Upgrade to Pro
 					</DropdownMenu.Item>
@@ -72,13 +73,15 @@
 					<DropdownMenu.Item>
 						<CreditCardIcon />
 						Billing
-					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<BellIcon />
-						Notifications
-					</DropdownMenu.Item>
+					</DropdownMenu.Item>-->
+					<a href="{config['url-base']}/leaderboard">
+						<DropdownMenu.Item>
+							<TrophyIcon />
+							Leaderboard
+						</DropdownMenu.Item>
+					</a>
 				</DropdownMenu.Group>
-				<DropdownMenu.Separator />-->
+				<DropdownMenu.Separator />
 				<DropdownMenu.Item>
 				<a href="{config['url-base']}/logout" class="flex items-center gap-2">
 					<LogOutIcon />

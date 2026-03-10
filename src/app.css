@@ -8,7 +8,7 @@
   --radius: 0.625rem;
   --background: #17171D;
   --foreground: #ec3750;
-  --card: oklch(1 0 0);
+  --card: #17171D;
   --card-foreground: oklch(0.147 0.004 49.25);
   --popover: #17171D;
   --popover-foreground: #ec3750;
