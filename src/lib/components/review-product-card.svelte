@@ -5,10 +5,12 @@
 	export let username;
 	export let hoursSpent;
 	export let status;
+    export let id;
 
     let displayName = (fetch('https://cachet.dunkirk.sh/users/' + username).then(r => r.json()).then(data => displayName = data.displayName));
 </script>
 
+<a href="/review/products/{id}">
 <Card.Root class="w-full p-4 border-2 hover:shadow-lg transition-all duration-200" style="border-color: var(--foreground);">
 	<div class="flex items-center justify-between gap-4 ">
 		<div class="flex items-center gap-4 flex-1">
@@ -24,3 +26,4 @@
 		</div>
 	</div>
 </Card.Root>
+</a>

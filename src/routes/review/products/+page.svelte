@@ -23,7 +23,7 @@
         {:else}
             <div class="flex flex-col gap-4 w-full max-w-4xl">
                 {#each products as product}
-                    <ReviewProductCard product={product["Product Name"]} username={product["SlackID"]} hoursSpent={product["Hours"]} status={product["Status"]} />
+                    <ReviewProductCard product={product["Product Name"]} username={product["SlackID"]} hoursSpent={product["Hours"]} status={product["Status"]} id={product["id"]} />
                 {/each}
             </div>
         {/if}
