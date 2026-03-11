@@ -246,14 +246,18 @@
         overflow: hidden;
         border-radius: 10px 10px 0 0;
         position: relative;
+        background-color: white !important;
+        box-sizing: border-box;
     }
     
     .item-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
         object-position: center;
         transition: transform 0.3s ease;
+        background-color: white !important;
+        border-radius: 0px;
     }
     
     .card:hover .item-image {
