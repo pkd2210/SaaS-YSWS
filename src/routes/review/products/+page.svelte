@@ -2,14 +2,7 @@
     export let data;
     import config from '$lib/stores/config.json';
     import ReviewProductCard from '$lib/components/review-product-card.svelte';
-    import { onMount } from 'svelte';
-    //filloutPasskey
-    //user
-    //isAdmin
-    //userTokens
-    //userRecordId
-    //reviewer
-    //products
+
     const products = data.products || [];
     let username = '';
 </script>
