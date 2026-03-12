@@ -56,7 +56,7 @@
 							<Sidebar.MenuSub class="ml-4 space-y-1">
 								{#each item.items as subItem (subItem.title)}
 									<Sidebar.MenuSubItem>
-										<Sidebar.MenuSubButton size="lg">
+										<Sidebar.MenuSubButton size="md">
 											{#snippet child({ props })}
 												<a href={subItem.url} {...props} class="text-base py-2">
 														<span>{subItem.title}</span>
@@ -73,16 +73,19 @@
 			{:else}
 				<!-- Simple clickable item without sub-items -->
 				<Sidebar.MenuItem class="mb-2">
-					<Sidebar.MenuButton tooltipContent={item.title} size="lg">
-						{#snippet child({ props })}
-							<a href={item.url} {...props} class="flex items-center gap-3 text-base">
-								{#if item.icon}
-									<item.icon class="h-5 w-5" />
-								{/if}
-								<span>{item.title}</span>
-							</a>
-						{/snippet}
-					</Sidebar.MenuButton>
+					<div class="flex w-full">
+						<Sidebar.MenuButton class="flex-1" tooltipContent={item.title} size="lg">
+							{#snippet child({ props })}
+								<a href={item.url} {...props} class="flex flex-1 items-center gap-3 text-base">
+									{#if item.icon}
+										<item.icon class="h-5 w-5" />
+									{/if}
+									<span>{item.title}</span>
+								</a>
+							{/snippet}
+						</Sidebar.MenuButton>
+						<div class="h-12 w-12 shrink-0" aria-hidden="true"></div>
+					</div>
 				</Sidebar.MenuItem>
 			{/if}
 		{/each}

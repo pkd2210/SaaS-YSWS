@@ -66,16 +66,17 @@
 			...(data.user ? [{
 				title: "Submit",
 				icon: SendHorizontal,
-				items: [
-					{
-						title: "Submit Product",
-						url: `${config['url-base']}/submit/product`,
-					},
-					{
-						title: "Submit Video",
-						url: `${config['url-base']}/submit/video`,
-					},
-				],
+				url: `${config['url-base']}/submit`,
+//				items: [
+//					{
+//						title: "Submit Product",
+//						url: `${config['url-base']}/submit/product`,
+//					},
+//					{
+//						title: "Submit Video",
+//						url: `${config['url-base']}/submit/video`,
+//					},
+//				],
 			}] : []),
 			{
 				title: "FAQ",
@@ -85,12 +86,12 @@
 			{
 				title: "Tutorials",
 				icon: ScrollText,
-				items: [
-					{
-						title: "Soon...",
-					},
-					
-				],
+//				items: [
+//					{
+//						title: "Soon...",
+//					},
+//					
+//				],
 			},
 			{
 				title: "Gallery",
@@ -100,16 +101,17 @@
 			...(data.user?.Reviewer ? [{
 				title: "Review Submissions",
 				icon: Clapperboard,
-				items: [
-					{
-						title: "Products",
-						url: `${config['url-base']}/review/products`,
-					},
-					{
-						title: "Videos",
-						url: `${config['url-base']}/review/videos`,
-					},
-				],
+				url: `${config['url-base']}/review/products`,
+//				items: [
+//					{
+//						title: "Products",
+//						url: `${config['url-base']}/review/products`,
+//					},
+//					{
+//						title: "Videos",
+//						url: `${config['url-base']}/review/videos`,
+//					},
+//				],
 			}] : []),
 		],
 	});

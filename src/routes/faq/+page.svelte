@@ -8,15 +8,15 @@
     const faqData = [
         {
             question: "What is TrailIt?",
-            answer: "TrailIt is a Hack Club event where you'll build a web-app project, then produce a trailer / showcase video for it. <br> And then you'll recive clappboards, and buy production equipment with them in the <a href='/shop'><u>shop</u></a>!"
+            answer: "TrailIt is a Hack Club event where you'll build a web-app project, and produce a trailer / showcase video for it. <br> And then you'll recive clappboards, and buy production equipment with them in the <a href='/shop'><u>shop</u></a>!"
         },
         {
             question: "How do I earn clappboards?",
-            answer: "Clappboards can be Earned thorugh 2 ways: <br> 1. Completing <a href='/quests'><u>quests</u></a> <br> 2. Submitting projects"
+            answer: "Clappboards can be Earned thorugh 2 ways: <br> 1. Completing <a href='/quests'><u>quests</u></a> <br> 2. Submitting projects."
         },
         {
             question: "What is the calculation for clappboards?",
-            answer: "You earn Clappboards based on a rating you will get from 0 to 10 (with another 3 bonus points availdable) * 12(Development) or 13.5(Video production) * hours you did."
+            answer: "You earn Clappboards based on a rating you will get from 0 to 10 (with another 3 bonus points availdable) * 12(Development) * hours you did."
         },
         {
             question: "How long will TrailIt run?",
@@ -24,7 +24,7 @@
         },
         {
             question: "How do I track my time?",
-            answer: "To track you development time for \"The product\", you should use <a href='https://hackatime.hackclub.com' target='_blank'><u>Hackatime</u></a>.<br>To track your time for \"The Video\", you should use <a href='https://lapse.hackclub.com' target='_blank'><u>Lapse</u></a>."
+            answer: "To track you development time for \"The product\", you should use <a href='https://hackatime.hackclub.com' target='_blank'><u>Hackatime</u></a>."
         },
         {
             question: "How do I submit my project?",
