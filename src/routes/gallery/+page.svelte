@@ -10,7 +10,7 @@
         projects = await res.json();
     });
 </script>
-<div class="flex flex-col gap-6 px-4 max-w-6xl mx-auto w-full">
+<div class="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 sm:px-6">
     <section class="flex flex-col items-center justify-center gap-2 pt-4">
         <div class="title">{config["ysws-name"]}'s Project Gallery</div>
         <div class="subtitle" style="opacity: 0.7;">Explore the projects created by fellow Hack Clubers and get inspired!</div>

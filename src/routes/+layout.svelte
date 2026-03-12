@@ -14,7 +14,7 @@
 <Sidebar.Provider>
 <AppSidebar {data}/>
 {#if isMobile.current}
-<Sidebar.Trigger />
+<Sidebar.Trigger class="fixed left-4 top-4 z-50" />
 {/if}
 <Sidebar.Inset>
 <div
