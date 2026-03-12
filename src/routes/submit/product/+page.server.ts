@@ -194,7 +194,13 @@ export const actions: Actions = {
                         "Hours": projectHours || 0,
                         "AI Usage": formData.aiUsage,
                         "AI Usage Explanation": formData.aiUsageDetails || '',
-                        "Hackatime project": formData.hackatimeProject || ''
+                        "Hackatime project": formData.hackatimeProject || '',
+                        "address": user.addresses.line_1 + " " + user.addresses.line_2,
+                        "city": user.addresses.city,
+                        "state": user.addresses.state,
+                        "zip": user.addresses.postal_code,
+                        "country": user.addresses.country,
+                        "birthdate": user.birthdate,
                     }
                 }
             ]);
