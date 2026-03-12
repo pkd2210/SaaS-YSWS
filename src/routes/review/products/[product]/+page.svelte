@@ -84,6 +84,13 @@
                 <br>
                 <a href="https://joe.fraud.hackclub.com/profile/{product?.fields["SlackID"]}" target="_blank" rel="noopener noreferrer" class="underline">Hackatime Project: {product?.fields["Hackatime project"] || 'No project available.'}</a>
                 <p class="text-sm">Hours: {product?.fields["Hours"] || 'No hours available.'}</p>
+                <video
+                src={product?.fields["Screenshot"] || ''}
+                class="max-w-full h-auto max-h-64 mx-auto rounded-md"
+                controls
+              >
+                <track kind="captions" />
+              </video>
             </div>
             
             <div class="flex flex-col gap-2 pt-4">
