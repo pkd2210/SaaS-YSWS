@@ -66,7 +66,7 @@
 			...(data.user ? [{
 				title: "Submit",
 				icon: SendHorizontal,
-				url: `${config['url-base']}/submit`,
+				url: `${config['url-base']}/submit/product`,
 //				items: [
 //					{
 //						title: "Submit Product",
