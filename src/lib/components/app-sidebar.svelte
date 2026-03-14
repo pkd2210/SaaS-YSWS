@@ -35,53 +35,53 @@
 		navMain: [
 			{
 				title: "Home",
-				url: config['url-base'],
+				url: "/",
 				icon: HomeIcon,
 				isActive: true,
 			},
 			{
 				title: "Shop",
-				url: `${config['url-base']}/shop`,
+				url: `/shop`,
 				icon: ShoppingCartIcon,
 				items: [
 					{
 						title: "Browse Items",
-						url: `${config['url-base']}/shop`,
+						url: `/shop`,
 					},
 					...(data.user ? [{
 						title: "Orders",
-						url: `${config['url-base']}/shop/orders`,
+						url: `/shop/orders`,
 					}] : []),
 					...(data.user ? [{
 						title: "Projects",
-						url: `${config['url-base']}/shop/projects`,
+						url: `/shop/projects`,
 					}] : []),
 					
 				],
 			},
 			...(data.user ? [{
 				title: "Quests",
-				url: `${config['url-base']}/quests`,
+				url: `/quests`,
 				icon: TrophyIcon,
 			}] : []),
 			...(data.user ? [{
 				title: "Submit",
 				icon: SendHorizontal,
-				url: `${config['url-base']}/submit/product`,
+				url: `/submit/product`,
 //				items: [
 //					{
 //						title: "Submit Product",
-//						url: `${config['url-base']}/submit/product`,
+//						url: `/submit/product`,
 //					},
 //					{
 //						title: "Submit Video",
-//						url: `${config['url-base']}/submit/video`,
+//						url: `/submit/video`,
 //					},
 //				],
 			}] : []),
 			{
 				title: "FAQ",
-				url: `${config['url-base']}/faq`,
+				url: `/faq`,
 				icon: GalleryVerticalEndIcon,
 			},
 			{
@@ -96,21 +96,21 @@
 			},
 			{
 				title: "Gallery",
-				url: `${config['url-base']}/gallery`,
+				url: `/gallery`,
 				icon: images,
 			},
 			...(data.user?.Reviewer ? [{
 				title: "Review Submissions",
 				icon: Clapperboard,
-				url: `${config['url-base']}/review/products`,
+				url: `/review/products`,
 //				items: [
 //					{
 //						title: "Products",
-//						url: `${config['url-base']}/review/products`,
+//						url: `/review/products`,
 //					},
 //					{
 //						title: "Videos",
-//						url: `${config['url-base']}/review/videos`,
+//						url: `/review/videos`,
 //					},
 //				],
 			}] : []),
@@ -120,7 +120,7 @@
 
 <Sidebar.Root {collapsible} {...restProps}>
 	<Sidebar.Header>
-		<a href={config['url-base']}>
+		<a href="/">
 			<div class="flex items-center gap-3 px-4 py-4">
 				<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
 					<Cable class="h-6 w-6" />
@@ -141,7 +141,7 @@
 			<NavUser user={sidebarData.user} data={data}/>
 		{:else}
 			<div class="px-3 py-2">
-				<a href="{config['url-base']}/api/login" class="text-md text-primary hover:underline font-large text-center">Login</a>
+				<a href="/api/login" class="text-md text-primary hover:underline font-large text-center">Login</a>
 			</div>
 		{/if}
 	</Sidebar.Footer>

@@ -35,17 +35,17 @@
 		<div class="fixed top-4 left-0 right-0 z-50 flex flex-col items-center">
 			<div style="color: {config['theme-color']}; background-color: {config['background-color']}; border: 2px solid {config['secondary-theme-color']};" class="flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-lg shadow-lg">
 				{#if data.user}
-				<span>{data.user.first_name} | <a href="{config['url-base']}/logout">Logout</a> | </span>
+				<span>{data.user.first_name} | <a href="/logout">Logout</a> | </span>
 				{:else}
-				<span><a href="{config['url-base']}/api/login">Login | </a></span>
+				<span><a href="/api/login">Login | </a></span>
 				{/if}
-				<a href="{config['url-base']}">Home</a>
-				<a href="{config['url-base']}/shop">Shop</a>
+				<a href="/">Home</a>
+				<a href="/shop">Shop</a>
 				{#if data.user}
-				<a href="{config['url-base']}/quests">Quests</a>
+				<a href="/quests">Quests</a>
 				{/if}
 				{#if data.isAdmin}
-				<a href="{config['url-base']}/admin">Admin</a>
+				<a href="/admin">Admin</a>
 				{/if}
 				{#if data.user}
 				<span>| {config['tokens-symbol']}: <span class="font-bold">{data.userTokens ? data.userTokens.toLocaleString() : '0'}</span></span>

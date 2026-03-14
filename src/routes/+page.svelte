@@ -52,7 +52,7 @@
     <!--End of the editing section-->
     <br>
     {#if data.user}
-        <a href="{config['url-base']}/shop"><button class="login-button">Go to Shop</button></a>
+        <a href="/shop"><button class="login-button">Go to Shop</button></a>
     {:else}
         <a href="/api/login"><button class="login-button">Login</button></a>
         <br>
