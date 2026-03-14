@@ -10,7 +10,6 @@
 
   const id = $derived($page.params.product);
 
-
   let approved = $state(false);
   let rejected = $state(false);
 
@@ -19,16 +18,27 @@
 
   let Styling = $state(0);
   let Functionality = $state(0);
-  let EaseOfUse = $state(0);
-  let Needeness = $state(0);
+  let Video = $state(0);
   let Bonus = $state(0);
+  let tokensFromProduct = $state(0);
 
   let RejectionReason = $state('');
   let HoursJustification = $state('');
+  /** @type {{ displayName?: string } | null} */
   let submitterUsername = $state(null);
   let loadingUsername = $state(false);
 
-  let Hours = $derived(product?.fields["Hours"] || 0);
+  const initialHours = $derived.by(() => Number(product?.fields["Hours"] ?? 0));
+  let Hours = $state(0);
+
+  $effect(() => {
+    Hours = initialHours;
+  });
+
+  $effect(() => {
+    tokensFromProduct =
+      (Number(Styling) + Number(Functionality) + Number(Video) + Number(Bonus)) * Number(Hours) * 12;
+  });
   
   onMount(() => {
     if (browser && product?.fields["SlackID"]) {
@@ -85,7 +95,7 @@
                 <a href="https://joe.fraud.hackclub.com/profile/{product?.fields["SlackID"]}" target="_blank" rel="noopener noreferrer" class="underline">Hackatime Project: {product?.fields["Hackatime project"] || 'No project available.'}</a>
                 <p class="text-sm">Hours: {product?.fields["Hours"] || 'No hours available.'}</p>
                 <video
-                src={product?.fields["Screenshot"] || ''}
+                src={String(product?.fields["Screenshot"] ?? '')}
                 class="max-w-full h-auto max-h-64 mx-auto rounded-md"
                 controls
               >
@@ -108,17 +118,17 @@
                         <input id="styling-amount-input"type="number" bind:value={Styling} min="0" max="2" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"placeholder="0 - 2"/>
                         <label for="functionality-amount-input" class="block text-sm font-medium mb-2">Functionality (0 - 3):</label>
                         <input id="functionality-amount-input"type="number" bind:value={Functionality} min="0" max="3" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"placeholder="0 - 3"/>
-                        <label for="ease-of-use-amount-input" class="block text-sm font-medium mb-2">Ease Of Use (0 - 3):</label>
-                        <input id="ease-of-use-amount-input"type="number" bind:value={EaseOfUse} min="0" max="3" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"placeholder="0 - 3"/>
-                        <label for="needeness-amount-input" class="block text-sm font-medium mb-2">Needeness (0 - 2):</label>
-                        <input id="needeness-amount-input"type="number" bind:value={Needeness} min="0" max="2" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"placeholder="0 - 2"/>
+                        <label for="video-amount-input" class="block text-sm font-medium mb-2">Video quality (0 - 5):</label>
+                        <input id="video-amount-input"type="number" bind:value={Video} min="0" max="5" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"placeholder="0 - 5"/>
                         <label for="bonus-amount-input" class="block text-sm font-medium mb-2">Bonus (0 - 3):</label>
                         <input id="bonus-amount-input"type="number" bind:value={Bonus} min="0" max="3" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"placeholder="0 - 3"/>
                         <Separator class="my-4" />
-                        <p>Total Score: {Styling + Functionality + EaseOfUse + Needeness + Bonus} / 13</p>
+                        <p>Total Score: {Number(Styling) + Number(Functionality) + Number(Video) + Number(Bonus)} / 13</p>
+                        <p>Dollars per hours: {Number(tokensFromProduct) / Number(Hours) / 25 || 0}</p>
                         <Separator class="my-4" />
                         <label for="hours" class="block text-sm font-medium mb-2">Hours:</label>
                         <input id="hours"type="number" bind:value={Hours} min="0" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"placeholder="0"/>
+                        <p>Tokens Amount: {tokensFromProduct}</p>
                         <Separator class="my-4" />
                         <label for="hours-justification" class="block text-sm font-medium mb-2">Hours Justification:</label>
                         <textarea id="hours-justification" bind:value={HoursJustification} required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Provide justification for the hours awarded" rows="3"></textarea>
@@ -136,8 +146,7 @@
                             <input type="hidden" name="productId" value={product?.id} />
                             <input type="hidden" name="styling" value={Styling} />
                             <input type="hidden" name="functionality" value={Functionality} />
-                            <input type="hidden" name="easeOfUse" value={EaseOfUse} />
-                            <input type="hidden" name="needeness" value={Needeness} />
+                            <input type="hidden" name="video" value={Video} />
                             <input type="hidden" name="bonus" value={Bonus} />
                             <input type="hidden" name="hours" value={Hours} />
                             <input type="hidden" name="hoursJustification" value={HoursJustification} />

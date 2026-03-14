@@ -29,8 +29,7 @@ export const actions: Actions = {
     const productId = data.get('productId') as string;
     const styling = Number(data.get('styling'));
     const functionality = Number(data.get('functionality'));
-    const easeOfUse = Number(data.get('easeOfUse'));
-    const needeness = Number(data.get('needeness'));
+    const video = Number(data.get('video'));
     const bonus = Number(data.get('bonus'));
     const hours = Number(data.get('hours'));
     const hoursJustification = data.get('hoursJustification') as string;
@@ -41,13 +40,12 @@ export const actions: Actions = {
       // First get the product record to retrieve the SlackID
       const productRecord = await base(process.env.PRODUCTS_TABLE_ID).find(productId);
       const submitterSlackID = productRecord.fields.SlackID;
-      const tokensFromProduct = (styling + functionality + easeOfUse + needeness + bonus) * hours * 12;
+      const tokensFromProduct = (styling + functionality + video + bonus) * hours * 12;
 
       await base(process.env.PRODUCTS_TABLE_ID).update(productId, {
         "Rating: Styling": styling,
         "Rating: Functionality": functionality,
-        "Rating: Ease of Use": easeOfUse,
-        "Rating: Needeness": needeness,
+        "Rating: Video": video,
         "Rating: Bonus": bonus,
         "Status": "Approved",
         "Hours": hours,
