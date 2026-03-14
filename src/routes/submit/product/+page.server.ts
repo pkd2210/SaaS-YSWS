@@ -21,9 +21,6 @@ export const load = async ({ parent, url }) => {
         };
     }
     
-    if (projectsData.data.projects.length === 0) {
-        throw redirect(303, '/submit');
-    }
     let projectListByName: Record<string, any> = {};
     projectsData.data.projects.forEach((project) => {
         projectListByName[project.name] = project;
