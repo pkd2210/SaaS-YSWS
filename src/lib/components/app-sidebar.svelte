@@ -81,7 +81,7 @@
 			}] : []),
 			{
 				title: "FAQ",
-				url: `/faq`,
+				url: `/#faq-section`,
 				icon: GalleryVerticalEndIcon,
 			},
 			{
