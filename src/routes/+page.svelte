@@ -16,28 +16,16 @@
             answer: "Links (🔗) can be Earned thorugh 2 ways: <br> 1. Completing <a href='/quests'><u>quests</u></a> <br> 2. Submitting projects."
         },
         {
-            question: "What is the calculation for clappboards?",
-            answer: "You earn Clappboards based on a rating you will get from 0 to 10 (with another 3 bonus points availdable) * 12(Development) * hours you did."
-        },
-        {
-            question: "How long will TrailIt run?",
-            answer: "TrailIt will run for 2 monthes (With expension maybe availdable), from March 15th, to May 15th"
-        },
-        {
             question: "How do I track my time?",
-            answer: "To track you development time for \"The product\", you should use <a href='https://hackatime.hackclub.com' target='_blank'><u>Hackatime</u></a>."
+            answer: "To track you development time, you should use <a href='https://hackatime.hackclub.com' target='_blank'><u>Hackatime</u></a>."
         },
         {
             question: "How do I submit my project?",
-            answer: "To submit your project, you got 2 parts:<br> 1. The Product: You should submit a link to your web-app, and a short description of it in the <a href='/submit/product'><u>Product Submission Form</u></a>.<br> 2. The Video: You should submit a link to your video, and a short description of it in the <a href='/submit/video'><u>Video Submission Form</u></a>."
+            answer: "To submit your project, You should submit a link to your SaaS application, and a short description of it in the <a href='/submit/product'><u>Product Submission Form</u></a>."
         },
         {
             question: "Can I submit more than one project?",
             answer: "Yes! You can submit as many projects as you want."
-        },
-        {
-            question: "What counts as a web-app?",
-            answer: "A web-app is basicly any non-static website, that has some sort of functionality or interactivity to it. It can be a game, a tool, a social media platform, or anything else you can think of! If you're not sure if your project counts as a web-app, feel free to ask in the <a href='https://hackclub.enterprise.slack.com/archives/C0AGG8J6PLL' target='_blank'><u>#trailit-ysws</u></a> channel on Slack! (Game engines like unity and godot does *NOT* count!)"
         },
         {
             question: "Is AI Allowed?",
