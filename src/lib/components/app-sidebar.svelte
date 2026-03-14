@@ -8,6 +8,7 @@
 	import SendHorizontal from "@lucide/svelte/icons/send-horizontal";
 	import Clapperboard from "@lucide/svelte/icons/clapperboard";
 	import { Separator } from "$lib/components/ui/separator/index.js";
+	import Cable from "@lucide/svelte/icons/cable";
 </script>
 
 <script lang="ts">
@@ -122,25 +123,25 @@
 		<a href={config['url-base']}>
 			<div class="flex items-center gap-3 px-4 py-4">
 				<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-					<Clapperboard class="h-6 w-6" />
+					<Cable class="h-6 w-6" />
 				</div>
 				<div class="flex flex-col">
-					<span class="text-lg font-semibold">TrailIt YSWS</span>
+					<span class="text-lg font-semibold">SaaS YSWS</span>
 				</div>
 			</div>
 		</a>
 	</Sidebar.Header>
 	<Sidebar.Content>
-		<Separator style="background-color: #ec3750;"/>
+		<Separator style="background-color: #002447;"/>
 		<NavMain items={sidebarData.navMain} />
 	</Sidebar.Content>
-	<Separator style="background-color: #ec3750;"/>
+	<Separator style="background-color: #002447;"/>
 	<Sidebar.Footer>
 		{#if sidebarData.user}
 			<NavUser user={sidebarData.user} data={data}/>
 		{:else}
 			<div class="px-3 py-2">
-				<a href="{config['url-base']}/api/login" class="text-md text-red-500 hover:underline font-large text-center">Login</a>
+				<a href="{config['url-base']}/api/login" class="text-md text-primary hover:underline font-large text-center">Login</a>
 			</div>
 		{/if}
 	</Sidebar.Footer>

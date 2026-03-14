@@ -367,7 +367,7 @@
     }
     
     .value {
-        color: #ec3750;
+        color: #002447;
         font-size: 0.95rem;
         text-align: right;
         flex: 1;

@@ -59,8 +59,8 @@
     <section class="faq-header">
         <div class="title">Frequently Asked Questions</div>
         <div class="subtitle">Find answers to common questions about {config["ysws-name"]}</div>
-        <div class="text-foreground text-center">By Submitting a Project to this YSW, You agree you will not preform any fraud, In any shape or form in all of HC Services (Including but not limited to this ysws, lapse, and hackatime)</div>
-        <Separator class="my-4" style="background-color: #ec3750;" />
+        <div class="text-foreground text-center">By Submitting a Project to this YSWS, You agree you will not preform any fraud, In any shape or form in all of HC Services (Including but not limited to this ysws, lapse, and hackatime)</div>
+        <Separator class="my-4" style="background-color: #002447;" />
     </section>
 
     <section class="faq-content">

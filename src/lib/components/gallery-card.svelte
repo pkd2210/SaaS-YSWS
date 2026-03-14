@@ -168,7 +168,7 @@
     }
 
     .value {
-        color: #ec3750;
+        color: #002447;
         font-size: 0.95rem;
         text-decoration: none;
     }
@@ -177,7 +177,7 @@
         display: flex;
         align-items: center;
         gap: 0.4rem;
-        color: #ec3750;
+        color: #002447;
         font-size: 0.95rem;
         text-decoration: none;
     }

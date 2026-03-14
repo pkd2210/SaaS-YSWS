@@ -1,8 +1,6 @@
 import config from '$lib/stores/config.json';
+import { HCA_CLIENT_SECRET } from '$env/static/private';
 import { redirect } from '@sveltejs/kit';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 export const GET = async ({ url, cookies }) => {
     // debugging if the callback dosent work
@@ -11,7 +9,7 @@ export const GET = async ({ url, cookies }) => {
     
     const code = url.searchParams.get('code');
     if (!code) {
-        throw redirect(303, config["url-base"]);
+        throw redirect(303, url.origin);
     }
     
     const response = await fetch('https://auth.hackclub.com/oauth/token', {
@@ -21,21 +19,27 @@ export const GET = async ({ url, cookies }) => {
         },
         body: new URLSearchParams({
             client_id: config["hca-client-id"],
-            client_secret: process.env.HCA_CLIENT_SECRET || '',
-            redirect_uri: `${config["url-base"]}/api/callback`,
+            client_secret: HCA_CLIENT_SECRET,
+            redirect_uri: `${url.origin}/api/callback`,
             code: code,
             grant_type: "authorization_code"
         }),
     });
-    const data = await response.json();
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok || !data?.access_token) {
+        throw redirect(303, url.origin);
+    }
+
+    const expiresIn = Number(data.expires_in);
     
-    cookies.set('hca_access_token', data.access_token, { 
-        path: '/', 
-        expires: new Date(Date.now() + data.expires_in * 1000),
+    cookies.set('hca_access_token', data.access_token, {
+        path: '/',
+        ...(Number.isFinite(expiresIn) && expiresIn > 0 ? { maxAge: Math.floor(expiresIn) } : {}),
         httpOnly: true,
-        secure: true,
+        secure: url.protocol === 'https:',
         sameSite: 'strict'
     });
 
-    throw redirect(303, config["url-base"] + "/shop");
+    throw redirect(303, `${url.origin}/shop`);
 };
