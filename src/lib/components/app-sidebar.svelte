@@ -84,16 +84,17 @@
 				url: `/#faq-section`,
 				icon: GalleryVerticalEndIcon,
 			},
-			{
-				title: "Tutorials",
-				icon: ScrollText,
+//			},
+//			{
+//				title: "Tutorials",
+//				icon: ScrollText,
 //				items: [
 //					{
 //						title: "Soon...",
 //					},
 //					
 //				],
-			},
+//			},
 			{
 				title: "Gallery",
 				url: `/gallery`,

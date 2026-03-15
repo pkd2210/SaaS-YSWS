@@ -9,7 +9,7 @@
     const faqData = [
         {
             question: "What is SaaS?",
-            answer: "SaaS (Software as a Service) is a software made available to users (or Buisnesses) online, from any device with the need to install anything. Examples of SaaS include: Google Docs, Notion, and Slack, and Fillout."
+            answer: "SaaS (Software as a Service) is a software made available to users (or Buisnesses) online, from any device without the need to install anything. Examples of SaaS include: Google Docs, Notion, and Slack, and Fillout."
         },
         {
             question: "How do I earn Links (🔗)?",
