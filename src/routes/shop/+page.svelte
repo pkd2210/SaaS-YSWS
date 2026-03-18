@@ -13,12 +13,14 @@
     });
 
     let selectedCategory = category;
+    let categoryList = [];
 
     onMount(async () => {
         const response = await fetch(`/shop/items`);
         if (response.ok) {
             const data = await response.json();
             allItems = Array.isArray(data) ? data : [data];
+            categoryList = Array.from(new Set(allItems.flatMap(item => item.Category || [])));
         } else {
             console.error('Failed to fetch items:', response.statusText);
         }
@@ -41,15 +43,9 @@
     <section class="flex flex-col items-center justify-center gap-4">
         <div class="flex flex-wrap items-center justify-center gap-4">
             <a href="?category=all" class="category-button {category === 'all' ? 'selected' : ''}">All</a>
-            <a href="?category=software" class="category-button {category === 'software' ? 'selected' : ''}">Software</a>
-            <a href="?category=audio" class="category-button {category === 'audio' ? 'selected' : ''}">Audio Recording</a>
-            <a href="?category=video-editing" class="category-button {category === 'video-editing' ? 'selected' : ''}">Video Editing</a>
-            <a href="?category=audio-editing" class="category-button {category === 'audio-editing' ? 'selected' : ''}">Audio Editing</a>
-            <a href="?category=photography" class="category-button {category === 'photography' ? 'selected' : ''}">Photography</a>
-            <a href="?category=storage" class="category-button {category === 'storage' ? 'selected' : ''}">Storage</a>
-            <a href="?category=accessories" class="category-button {category === 'accessories' ? 'selected' : ''}">Accessories</a>
-            <a href="?category=streaming" class="category-button {category === 'streaming' ? 'selected' : ''}">Streaming</a>
-            <a href="?category=other" class="category-button {category === 'other' ? 'selected' : ''}">Other</a>
+            {#each categoryList as cat}
+                <a href="?category={cat}" class="category-button {category === cat ? 'selected' : ''}">{cat}</a>
+            {/each}
         </div>
     </section>
     <section class="cards-container">
