@@ -8,8 +8,8 @@
         // FAQ Data
     const faqData = [
         {
-            question: "What is SaaS?",
-            answer: "SaaS (Software as a Service) is a software made available to users (or Buisnesses) online, from any device without the need to install anything. Examples of SaaS include: Google Docs, Notion, and Slack, and Fillout."
+            question: "What is Cable?",
+            answer: "Cable is a YSWS (Your SaaS, Your Ship) that focuses on shipping projects that connect to existing applications, such as n8n nodes, Minecraft mods, Discord/Slack bots, and more. We provide the cables, you provide the connections!"
         },
         {
             question: "How do I earn Links (🔗)?",
@@ -21,7 +21,7 @@
         },
         {
             question: "How do I submit my project?",
-            answer: "To submit your project, You should submit a link to your SaaS application, and a short description of it in the <a href='/submit/product'><u>Product Submission Form</u></a>."
+            answer: "To submit your project, You should submit a link to your application, and a short description of it in the <a href='/submit/product'><u>Product Submission Form</u></a>."
         },
         {
             question: "Can I submit more than one project?",
@@ -29,7 +29,7 @@
         },
         {
             question: "Is AI Allowed?",
-            answer: "Yes, AI is allowed to be used, but, its most be used only as an assistent, IT SHOULD *NOT* Write code insted of you."
+            answer: "Yes, AI is allowed to be used, but, its most be used only as an assistent, IT SHOULD *NOT* Write code insted of you, you should learn thorugh docs / youtube videos / books."
         }
     ];
 
@@ -44,9 +44,9 @@
     <!-- edit Those to fit your project -->
     <!--     <svg class="hero-svg" style="fill: #3c4858;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><circle cx="50%" cy="50%" r="240" fill="{config['theme-color']}" /><g transform="translate(320, 320) scale(0.6) translate(-320, -320)"><path d="M512 128C514 128 515.9 128.1 517.8 128.3L422.1 224L490 224L562 152C570.8 163 576 176.9 576 192L576 448C576 483.3 547.3 512 512 512L128 512C92.7 512 64 483.3 64 448L64 192C64 156.7 92.7 128 128 128L198.1 128L102.1 224L170 224L265 129L266 128L358.1 128L262.1 224L330 224L425 129L426 128L512.1 128z"/></g></svg>-->
     <div class="title">Welcome to {config["ysws-name"]}'s Shop</div>
-    <p class="subtitle">{config["ysws-description"]}</p>
+    <p class="subtitle" style="text-align: center">You Ship: Something that connect to an existing application (n8n node, minecraft mode, Discord / slack bot, more....)<br>We Ship: Everything the comes with a cable (Cables, mouses, keyboards, more...)</p>
     <!--End of the editing section-->
-    <button class="slack-button"><a href="https://hackclub.enterprise.slack.com/archives/C0ALR4T650U" target="_blank">#saas-ysws</a></button>
+    <button class="slack-button"><a href="https://hackclub.enterprise.slack.com/archives/C0ALR4T650U" target="_blank">#cable-ysws</a></button>
     <style>
         .hero-svg {
             transition: transform 0.3s ease;

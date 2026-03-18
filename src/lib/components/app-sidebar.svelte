@@ -127,7 +127,7 @@
 					<Cable class="h-6 w-6" />
 				</div>
 				<div class="flex flex-col">
-					<span class="text-lg font-semibold">SaaS YSWS</span>
+					<span class="text-lg font-semibold">Cable YSWS</span>
 				</div>
 			</div>
 		</a>
