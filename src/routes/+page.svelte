@@ -9,7 +9,7 @@
     const faqData = [
         {
             question: "What is Cable?",
-            answer: "Cable is a YSWS (Your SaaS, Your Ship) that focuses on shipping projects that connect to existing applications, such as n8n nodes, Minecraft mods, Discord/Slack bots, and more. We provide the cables, you provide the connections!"
+            answer: "Cable is a YSWS (Your Ship, We Ship) that focuses on shipping projects that connect to existing applications, such as n8n nodes, Minecraft mods, Discord/Slack bots, and more. We provide the cables, you provide the connections!"
         },
         {
             question: "How do I earn Links (🔗)?",
